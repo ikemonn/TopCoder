@@ -1,22 +1,9 @@
 # -*- coding: utf-8 -*-
 import math,string,itertools,fractions,heapq,collections,re,array,bisect
 
-class IdentifyingWood:
-    def check(self, s, t):
-        if len(t) > len(s):
-            return "Nope."
-        is_match = True
-        for t_w in t:
-            if t_w in s:
-                index = s.index(t_w)
-                s = s[index+1:]
-            else:
-                is_match = False
-                break
-                
-        if is_match:
-            return "Yep, it's wood."
-        return "Nope."
+class IncrementingSequence:
+    def canItBeDone(self, k, A):
+        return ""
 
 # CUT begin
 # TEST CODE FOR PYTHON {{{
@@ -46,12 +33,12 @@ def pretty_str(x):
     else:
         return str(x)
 
-def do_test(s, t, __expected):
+def do_test(k, A, __expected):
     startTime = time.time()
-    instance = IdentifyingWood()
+    instance = IncrementingSequence()
     exception = None
     try:
-        __result = instance.check(s, t);
+        __result = instance.canItBeDone(k, A);
     except:
         import traceback
         exception = traceback.format_exc()
@@ -72,33 +59,36 @@ def do_test(s, t, __expected):
         return 0
 
 def run_tests():
-    sys.stdout.write("IdentifyingWood (250 Points)\n\n")
+    sys.stdout.write("IncrementingSequence (500 Points)\n\n")
 
     passed = cases = 0
     case_set = set()
     for arg in sys.argv[1:]:
         case_set.add(int(arg))
 
-    with open("IdentifyingWood.sample", "r") as f:
+    with open("IncrementingSequence.sample", "r") as f:
         while True:
             label = f.readline()
             if not label.startswith("--"): break
 
-            s = f.readline().rstrip()
-            t = f.readline().rstrip()
+            k = int(f.readline().rstrip())
+            A = []
+            for i in range(0, int(f.readline())):
+                A.append(int(f.readline().rstrip()))
+            A = tuple(A)
             f.readline()
             __answer = f.readline().rstrip()
 
             cases += 1
             if len(case_set) > 0 and (cases - 1) in case_set: continue
             sys.stdout.write("  Testcase #%d ... " % (cases - 1))
-            passed += do_test(s, t, __answer)
+            passed += do_test(k, A, __answer)
 
     sys.stdout.write("\nPassed : %d / %d cases\n" % (passed, cases))
 
-    T = time.time() - 1479545086
+    T = time.time() - 1479635120
     PT, TT = (T / 60.0, 75.0)
-    points = 250 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
+    points = 500 * (0.3 + (0.7 * TT * TT) / (10.0 * PT * PT + TT * TT))
     sys.stdout.write("Time   : %d minutes %d secs\n" % (int(T/60), T%60))
     sys.stdout.write("Score  : %.2f points\n" % points)
 
